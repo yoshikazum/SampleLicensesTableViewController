@@ -14,6 +14,6 @@ Please see "SampleLicensesTableViewController" Folder.
 
 
 #Screenshot
-![screenshot1](licensestableview1.jpg)
+![screenshot1](https://github.com/yoshikazum/SampleLicensesTableViewController/raw/master/licensestableview1.jpg)
 
-![screenshot2](licensestableview2.jpg)
+![screenshot2](https://github.com/yoshikazum/SampleLicensesTableViewController/raw/master/licensestableview2.jpg)
