@@ -33,4 +33,6 @@
 
 @property (strong, nonatomic) ViewController *viewController;
 
+@property (nonatomic, retain) UINavigationController *navigationController;
+
 @end

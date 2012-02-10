@@ -24,7 +24,10 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "LicensesTableViewController.h"
 
-@interface ViewController : UIViewController
-
+@interface ViewController : UITableViewController{
+  LicensesTableViewController *licencesTableViewController_;
+}
+@property (nonatomic, retain) LicensesTableViewController *licencesTableViewController;
 @end

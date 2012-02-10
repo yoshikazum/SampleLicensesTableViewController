@@ -22,6 +22,8 @@
 		DBC9343F14E5807E00B4B12C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBC9343D14E5807E00B4B12C /* InfoPlist.strings */; };
 		DBC9344214E5807E00B4B12C /* SampleLicensesTableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC9344114E5807E00B4B12C /* SampleLicensesTableViewControllerTests.m */; };
 		DBC9344E14E580DE00B4B12C /* LicensesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC9344D14E580DE00B4B12C /* LicensesTableViewController.m */; };
+		DBDED12614E5AFC5008A1DE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBDED12814E5AFC5008A1DE3 /* Localizable.strings */; };
+		DBDED12B14E5B304008A1DE3 /* licenses.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBDED12A14E5B304008A1DE3 /* licenses.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,9 @@
 		DBC9344114E5807E00B4B12C /* SampleLicensesTableViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleLicensesTableViewControllerTests.m; sourceTree = "<group>"; };
 		DBC9344C14E580DE00B4B12C /* LicensesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LicensesTableViewController.h; path = LicensesTableViewController/LicensesTableViewController.h; sourceTree = "<group>"; };
 		DBC9344D14E580DE00B4B12C /* LicensesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LicensesTableViewController.m; path = LicensesTableViewController/LicensesTableViewController.m; sourceTree = "<group>"; };
+		DBDED12714E5AFC5008A1DE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DBDED12914E5AFCF008A1DE3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DBDED12A14E5B304008A1DE3 /* licenses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = licenses.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +140,8 @@
 				DBC9341C14E5807D00B4B12C /* InfoPlist.strings */,
 				DBC9341F14E5807D00B4B12C /* main.m */,
 				DBC9342114E5807D00B4B12C /* SampleLicensesTableViewController-Prefix.pch */,
+				DBDED12814E5AFC5008A1DE3 /* Localizable.strings */,
+				DBDED12A14E5B304008A1DE3 /* licenses.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -220,6 +227,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
 			);
 			mainGroup = DBC9340414E5807D00B4B12C;
 			productRefGroup = DBC9341014E5807D00B4B12C /* Products */;
@@ -240,6 +248,8 @@
 				DBC9341E14E5807D00B4B12C /* InfoPlist.strings in Resources */,
 				DBC9342A14E5807E00B4B12C /* ViewController_iPhone.xib in Resources */,
 				DBC9342D14E5807E00B4B12C /* ViewController_iPad.xib in Resources */,
+				DBDED12614E5AFC5008A1DE3 /* Localizable.strings in Resources */,
+				DBDED12B14E5B304008A1DE3 /* licenses.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +342,15 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		DBDED12814E5AFC5008A1DE3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DBDED12714E5AFC5008A1DE3 /* en */,
+				DBDED12914E5AFCF008A1DE3 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -385,7 +404,13 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SampleLicensesTableViewController/SampleLicensesTableViewController-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					DEBUG_LOGGING,
+				);
 				INFOPLIST_FILE = "SampleLicensesTableViewController/SampleLicensesTableViewController-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -397,6 +422,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SampleLicensesTableViewController/SampleLicensesTableViewController-Prefix.pch";
 				INFOPLIST_FILE = "SampleLicensesTableViewController/SampleLicensesTableViewController-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -455,6 +481,7 @@
 				DBC9344714E5807E00B4B12C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DBC9344814E5807E00B4B12C /* Build configuration list for PBXNativeTarget "SampleLicensesTableViewControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -463,6 +490,7 @@
 				DBC9344A14E5807E00B4B12C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

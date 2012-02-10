@@ -25,53 +25,137 @@
 
 #import "LicensesTableViewController.h"
 
+@interface LicensesTableViewController()
+- (UITableViewCell *)dequeueCell:(NSIndexPath *)indexPath;
+- (UITableViewCell *)createLicenseCell:(NSString *)title 
+                           description:(NSString *)description;
+@property (nonatomic, retain) NSDictionary *licensesDictionary;
+@end
+
 @implementation LicensesTableViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+@synthesize licensesDictionary = licensesDictionary_;
+
+- (id)initWithDictionary:(NSDictionary *)licensesDictionary{
+  DBG_HERE
+  if ((self=[super initWithStyle:UITableViewStylePlain])) {
+    self.title = NSLocalizedString(@"Legal Notice", nil);
+  }
+  self.licensesDictionary = licensesDictionary;
+  return self;
 }
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
+  DBG_HERE
+  [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc{
+  DBG_HERE
+  self.licensesDictionary = nil;
+  [super dealloc];
 }
 
 #pragma mark - View lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
+  DBG_HERE
+  [super loadView];
 }
-*/
 
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
-*/
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+  DBG_HERE
+  [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  DBG_HERE
+  return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - TableViewController
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+  DBG_HERE
+  if (self.licensesDictionary==nil) {
+    return 0;
+  }
+  return [self.licensesDictionary count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView 
+  heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+  DBG_HERE
+  UITableViewCell *cell = [self dequeueCell:indexPath];
+  return cell.frame.size.height;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView 
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+  DBG_HERE
+  return [self dequeueCell:indexPath];
+}
+
+#pragma mark - Private Methods
+
+- (UITableViewCell *)dequeueCell:(NSIndexPath *)indexPath{
+  DBG_HERE
+  NSArray *nameArray = [self.licensesDictionary allKeys];
+  NSString *name = [nameArray objectAtIndex:indexPath.row]; 
+  NSString *cellIdentifier = [NSString stringWithFormat:@"license:%@", name];
+  
+  UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell==nil) {
+    NSString *description = [self.licensesDictionary objectForKey:name];
+    cell = [self createLicenseCell:name description:description];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  }else{
+    return cell;
+  }
+  return cell;
+}
+
+- (UITableViewCell *)createLicenseCell:(NSString *)title 
+                           description:(NSString *)description{
+  DBG_HERE
+  DEBUG_LOG(@"title: %@, desc: %@", title, description);
+  UITableViewCell *cell = [[[UITableViewCell alloc]init]autorelease];
+  UILabel *titleLabel = 
+    [[[UILabel alloc]initWithFrame:CGRectMake(10,
+                                              10,
+                                              self.tableView.frame.size.width-20,
+                                              20)]autorelease];
+  [titleLabel setText:title];
+  [titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
+  [cell addSubview:titleLabel];
+  
+  UILabel *descriptionLabel = 
+    [[[UILabel alloc]initWithFrame:
+      CGRectMake(10,
+                 titleLabel.frame.origin.y+ titleLabel.frame.size.height+ 10,
+                 self.tableView.frame.size.width-20,
+                 0)]autorelease];
+  [descriptionLabel setText:description];
+  [descriptionLabel setFont:[UIFont systemFontOfSize:10]];
+  [descriptionLabel setNumberOfLines:0];
+  [descriptionLabel sizeToFit];
+  [cell addSubview:descriptionLabel];
+  
+  CGFloat cellHeight =  10 + 10 + 10 +
+                        titleLabel.frame.size.height + 
+                        descriptionLabel.frame.size.height;
+  
+  cell.frame = CGRectMake(0, 0, self.tableView.frame.size.width, cellHeight);
+  
+  return cell;
 }
 
 @end

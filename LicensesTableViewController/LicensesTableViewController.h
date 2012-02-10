@@ -25,6 +25,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LicensesTableViewController : UIViewController
-
+@interface LicensesTableViewController : UITableViewController{
+  NSDictionary *licensesDictionary_;
+}
+- (id)initWithDictionary:(NSDictionary *)licensesDictionary;
 @end

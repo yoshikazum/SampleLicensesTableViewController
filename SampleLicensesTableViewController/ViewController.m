@@ -25,51 +25,80 @@
 
 #import "ViewController.h"
 
+@interface ViewController()
+- (void)showLicencesTableViewController;
+@end
+
+enum { LICENSE };
+
 @implementation ViewController
+
+@synthesize licencesTableViewController = licencesTableViewController_;
+
+- (id)init{
+  if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
+  }
+  return self;
+}
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
+  DBG_HERE
+  [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc{
+  DBG_HERE
+  self.licencesTableViewController = nil;
+  [super dealloc];
 }
 
 #pragma mark - View lifecycle
 
+- (void)loadView{
+  DBG_HERE
+  [super loadView];
+}
+
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+  DBG_HERE
+  [super viewDidLoad];
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+  DBG_HERE
+  [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+  DBG_HERE
+  [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+  DBG_HERE
+  [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+  DBG_HERE
 	[super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+  DBG_HERE
 	[super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+  DBG_HERE
     // Return YES for supported orientations
   if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
       return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
@@ -78,4 +107,37 @@
   }
 }
 
+#pragma mark - TableViewController
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+  return 5;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+  DBG_HERE
+  UITableViewCell *cell = [[[UITableViewCell alloc]init]autorelease];
+  if (indexPath.row==LICENSE) {
+    cell.textLabel.text = NSLocalizedString(@"Legal Notice", nil);
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  }
+  return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  DBG_HERE
+  if (indexPath.row==LICENSE) {
+    [self showLicencesTableViewController];
+  }
+}
+
+#pragma mark - Private Methods
+
+- (void)showLicencesTableViewController{
+  DBG_HERE
+  if (self.licencesTableViewController==nil) {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"licenses" ofType:@"plist"];
+    NSDictionary *licenses = [NSDictionary dictionaryWithContentsOfFile:path];
+    self.licencesTableViewController = [[[LicensesTableViewController alloc]initWithDictionary:licenses]autorelease];
+  }
+  [self.navigationController pushViewController:self.licencesTableViewController animated:YES];
+}
 @end
