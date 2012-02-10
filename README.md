@@ -11,3 +11,9 @@ Please see "SampleLicensesTableViewController" Folder.
 
 #使い方
 サンプルコードを"SampleLicensesTableViewController"フォルダに準備しているのでよく見てください。
+
+
+#Screenshot
+![screenshot1](licensestableview1.jpg)
+
+![screenshot2](licensestableview2.jpg)
